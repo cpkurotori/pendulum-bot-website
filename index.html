@@ -74,7 +74,7 @@
                         This problem combine many areas of robotics resulting in a interesting and diverse project. In order to initially track the ball we employed computer vision in order to track the ball in the view of the camera. To estimate where the ball is at any given time we had to derive the dynamics of the pendulum system and combine this with the input data in order to perform paramter estimation. After this we must select the optimal point at which the catch will be attempted, plan the path accordingly to avoid the path of the ball. Finally we must without much sensing of the ball's relative position to the end effector, we must effectively close the gripper on the ball to secure the catch. This project caught our attention because of the combination of all of these different concepts that we have learned in this class. To complete this project we had to develop each of the individual components and also integrate them together in one cohesive system.
                     </p>
                     <p>
-                        There are a number of real world applications for this project as a whole as well as the individual components of this project. As a whole this project is related to the capture of a moving object which could be related to any task involving the tracking and capture of another object within the robot's workspace. This is relevant to the harder, but related problem of catching a thrown or falling ball. Extensions of this project include robots which catch falling objects, stop independently moving objects, or track and react to moving objects. The sub parts of this project have even more applications in the real world. The vision algorithms we implemented here are rather specific to the case of tennis balls, but these techniques could be applied to identify any number of different objects. Similarly the parameter estimation and pendulum modeling is related to a number of different real world problems in which a dynamic system is learned from observations. This is an immense number of applications which include things like tracking a falling ball, rotating systems, or other oscillatory motions. 
+                        There are a number of real world applications for this project as a whole as well as the individual components of this project. As a whole this project is related to the capture of a moving object which could be related to any task involving the tracking and capture of another object within the robot's workspace. This is relevant to the harder, but related problem of catching a thrown or falling ball. Extensions of this project include robots which catch falling objects, stop independently moving objects, or track and react to moving objects. The sub parts of this project have even more applications in the real world. The vision algorithms we implemented here are rather specific to the case of tennis balls, but these techniques could be applied to identify any number of different objects. Similarly the parameter estimation and pendulum modeling is related to a number of different real world problems in which a dynamic system is learned from observations. This is an immense number of applications which include things like tracking a falling ball, rotating systems, or other oscillatory motions.
                     </p>
 
                 </div>
@@ -118,7 +118,13 @@
                     <p class="lead">Talk about the results here. How well did your project work? What tasks did it perform? Illustrate with pictures
                         and at least one video.
                     </p>
-                    <video controls="controls" width="800" height="600" name="Vision Demo" src="/img/vision_demo.mov"></video>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 mx-auto">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video controls="controls" name="Vision Demo" src="img/vision_demo.mov"></video>
+                    </div>
                 </div>
             </div>
         </div>
@@ -150,7 +156,7 @@
                                 Cameron is an EECS student with a background in algorithms, task automation, and software engineering. He has taken/is taking CS170, CS70, CS61 series as well as the EE16 series. This past summer he had the opportunity to be a software developer intern at IBM.
                             </p>
                             <p>
-                                The main contributions of Cameron were towards the construction of the pendulum rig, the vision processing code, and the code to compute the transformation from the camera frame of the kinect to the frame of the robot. He additionally worked on the overall system design and helped to write much of the code to create the subscribers, publishers, and other ROS nodes. 
+                                The main contributions of Cameron were towards the construction of the pendulum rig, the vision processing code, and the code to compute the transformation from the camera frame of the kinect to the frame of the robot. He additionally worked on the overall system design and helped to write much of the code to create the subscribers, publishers, and other ROS nodes.
                             </p>
                         </div>
                     </div>
@@ -168,7 +174,7 @@
                                 Matt is an EECS student with a background in algorithms, robotics and aritifical intelligence. I have taken/am taking EE126, CS170, CS188, and DS100. In high school he was involved in robotics for four years primarily from the mechanical persepctive. Additionally he has taken classes in CAD and computer integrated manufacturing.
                             </p>
                             <p>
-                                The main contributions of Matt were towards the construction of the gripper attachment, the vision processing code, the code to compute the transformation from the camera frame of the kinect to the frame of the robot, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project. 
+                                The main contributions of Matt were towards the construction of the gripper attachment, the vision processing code, the code to compute the transformation from the camera frame of the kinect to the frame of the robot, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project.
                             </p>
                         </div>
                     </div>
@@ -186,7 +192,7 @@
                                 Sean is an EECS student with a background in algorithms, artificial intelligence, and low-level programming, having taken courses in both the EE, CS, Math, and Cognitive Science departments. He also does research in reinforcement learning and controls for microrobots. Additionally he has experience with computer vision and OpenCV.
                             </p>
                             <p>
-                                The main contributions of Sean were in the dynamics modeling of the pendulum system, the parameter estimation, the code to plan/move the arm, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project. 
+                                The main contributions of Sean were in the dynamics modeling of the pendulum system, the parameter estimation, the code to plan/move the arm, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project.
                             </p>
                         </div>
                     </div>
@@ -204,7 +210,7 @@
                                 Swapnil is an EECS student with a background in algorithms, artificial intelligence and controls. He has taken CS170, CS188, EE120 and is taking EECS149 currently. His past research experience delves deeply into low-level optimization, parallelization and regression algorithms. He is currently also learning low-level control of Kobuki in EECS149 and state machine generation.
                             </p>
                             <p>
-                                The main contributions of Swapnil were in the dynamics modeling of the pendulum system, the parameter estimation, the code to plan/move the arm, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project. 
+                                The main contributions of Swapnil were in the dynamics modeling of the pendulum system, the parameter estimation, the code to plan/move the arm, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project.
                             </p>
 
                         </div>
