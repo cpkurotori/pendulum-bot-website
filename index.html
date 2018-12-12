@@ -74,7 +74,7 @@
                         This problem combine many areas of robotics resulting in a interesting and diverse project. In order to initially track the ball we employed computer vision in order to track the ball in the view of the camera. To estimate where the ball is at any given time we had to derive the dynamics of the pendulum system and combine this with the input data in order to perform paramter estimation. After this we must select the optimal point at which the catch will be attempted, plan the path accordingly to avoid the path of the ball. Finally we must without much sensing of the ball's relative position to the end effector, we must effectively close the gripper on the ball to secure the catch. This project caught our attention because of the combination of all of these different concepts that we have learned in this class. To complete this project we had to develop each of the individual components and also integrate them together in one cohesive system.
                     </p>
                     <p>
-                        There are a number of real world applications for this project as a whole as well as the individual components of this project.
+                        There are a number of real world applications for this project as a whole as well as the individual components of this project. As a whole this project is related to the capture of a moving object which could be related to any task involving the tracking and capture of another object within the robot's workspace. This is relevant to the harder, but related problem of catching a thrown or falling ball. Extensions of this project include robots which catch falling objects, stop independently moving objects, or track and react to moving objects. The sub parts of this project have even more applications in the real world. The vision algorithms we implemented here are rather specific to the case of tennis balls, but these techniques could be applied to identify any number of different objects. Similarly the parameter estimation and pendulum modeling is related to a number of different real world problems in which a dynamic system is learned from observations. This is an immense number of applications which include things like tracking a falling ball, rotating systems, or other oscillatory motions. 
                     </p>
 
                 </div>
@@ -199,7 +199,16 @@
             <div class="row">
                 <div class="col-8 mx-auto">
                     <h2>Additional Materials</h2>
-                    <p class="lead">Other stuff that might be cool.</p>
+                    <p class="lead">Our code</p>
+                    <p>
+                        The full code for this system can be found <a href="https://github.com/omatthew98/pendulum-bot">here</a>.
+                    </p>
+                    <p class="lead">Resources</p>
+                    <ul>
+                        <li>
+                            The computer vision code we used was a modification of the code by Adrian Rosebrock from pyimagesearch. The tutorial we followed is <a href="https://www.pyimagesearch.com/2015/09/14/ball-tracking-with-opencv/">here</a>.
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
