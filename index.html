@@ -65,21 +65,18 @@
     <section id="intro">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Introduction</h2>
-                    <p class="lead">
-                        <b>End Goals of our Project:</b>
-                        <p class="lead">
-                            What makes this interesting:
-                        </p>
-                        <p class="lead">
-                            Real world applications of this project:
-                        </p>
-                        <ul>
-                            <li>End Goals of our Project: </li>
-                            <li>Why is this an interesting project? What interesting problems do you need to solve to make your solution work</li>
-                            <li>In waht real-world robotics applications could the work from your project be useful?</li>
-                        </ul>
+                    <p>
+                        The end goal of our system is as follows. Our system will use computer vision to track the movement of a tennis ball swinging like a pendulum. From here our code will generate a model of the system, which will enable us to track where the ball will be at a given time step in the future. Next we can move the robot to a optimal position from which we will be able to sense when the ball nears, and finally catch the ball from the air in the robot's gripper.
+                    </p>
+                    <p>
+                        This problem combine many areas of robotics resulting in a interesting and diverse project. In order to initially track the ball we employed computer vision in order to track the ball in the view of the camera. To estimate where the ball is at any given time we had to derive the dynamics of the pendulum system and combine this with the input data in order to perform paramter estimation. After this we must select the optimal point at which the catch will be attempted, plan the path accordingly to avoid the path of the ball. Finally we must without much sensing of the ball's relative position to the end effector, we must effectively close the gripper on the ball to secure the catch. This project caught our attention because of the combination of all of these different concepts that we have learned in this class. To complete this project we had to develop each of the individual components and also integrate them together in one cohesive system.
+                    </p>
+                    <p>
+                        There are a number of real world applications for this project as a whole as well as the individual components of this project.
+                    </p>
+
                 </div>
             </div>
         </div>
@@ -88,7 +85,7 @@
     <section id="design" class="bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Design</h2>
                     <p class="lead">Talk about the design of the robot here. What design criteria must your project meet? What is the desired
                         functionality? Describe the design you chose. What design choices did you make when you formulated your design? What
@@ -102,7 +99,7 @@
     <section id="implementation">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Implementation</h2>
                     <p class="lead">Talk about the implementation here. Describe any hardware you used or built. Illustrate with pictures and diagrams.
                         What parts did you use to build your solution? describe any software you wrote in detail. Illustrate with diagrams, flow charts,
@@ -116,7 +113,7 @@
     <section id="results" class="bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Results</h2>
                     <p class="lead">Talk about the results here. How well did your project work? What tasks did it perform? Illustrate with pictures
                         and at least one video.
@@ -129,7 +126,7 @@
     <section id="conclusion">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Conclusion</h2>
                     <p class="lead">Discuss your results. How well did your finished solution meet your design criteria.</p>
                 </div>
@@ -140,13 +137,13 @@
     <section id="Team" class="bg-light">
         <div class="container">
             <div class="row my-5">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Team</h2>
                     <div class="row">
-                        <div class="col-lg-1  mx-auto">
-                            <img src="img/cam.png" alt="Cameron" class="auto-mx" height="175" width="175">
+                        <div class="col-4  mx-auto">
+                            <img src="img/cam.png" alt="Cameron" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-lg-7 mx-auto">
+                        <div class="col-8 mx-auto">
                             <p class="lead"> <b>Cameron Kurotori</b></p>
                             Cameron is an EECS student with a background in algorithms, task automation, and software engineering. He has taken/is taking CS170, CS70, CS61 series as well as the EE16 series. This past summer he had the opportunity to be a software developer intern at IBM.
                         </div>
@@ -154,25 +151,25 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <div class="row">
-                        <div class="col-lg-1 mx-auto">
-                            <img src="img/cam.png" alt="Matt" class="auto-mx" height="175" width="175">
+                        <div class="col-4 mx-auto">
+                            <img src="img/matt.png" alt="Matt" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-lg-7 mx-auto">
+                        <div class="col-8 mx-auto">
                             <p class="lead"> <b>Matt Owen</b></p>
-                            Matt is an EECS student with a background in algorithms, robotics and aritifical intelligence.  I have taken/am taking EE126, CS170, CS188, and DS100. In high school he was involved in robotics for four years primarily from the mechanical persepctive. Additionally he has taken classes in CAD and computer integrated manufacturing.
+                            Matt is an EECS student with a background in algorithms, robotics and aritifical intelligence. I have taken/am taking EE126, CS170, CS188, and DS100. In high school he was involved in robotics for four years primarily from the mechanical persepctive. Additionally he has taken classes in CAD and computer integrated manufacturing.
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <div class="row">
-                        <div class="col-lg-1  mx-auto">
-                            <img src="img/cam.png" alt="Sean" class="auto-mx" height="175" width="175">
+                        <div class="col-4  mx-auto">
+                            <img src="img/sean.png" alt="Sean" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-lg-7 mx-auto">
+                        <div class="col-8 mx-auto">
                             <p class="lead"> <b>Sean Farhat</b></p>
                             Sean is an EECS student with a background in algorithms, artificial intelligence, and low-level programming, having taken courses in both the EE, CS, Math, and Cognitive Science departments. He also does research in reinforcement learning and controls for microrobots. Additionally he has experience with computer vision and OpenCV.
                         </div>
@@ -180,16 +177,16 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <div class="row">
-                        <div class="col-lg-1  mx-auto">
-                            <img src="img/cam.png" alt="Swapnil" class="auto-mx" height="175" width="175">
+                        <div class="col-4  mx-auto">
+                            <img src="img/swapnil.png" alt="Swapnil" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-lg-7 mx-auto">
+                        <div class="col-8 mx-auto">
                             <p class="lead"> <b>Swapnil Das</b></p>
                             Swapnil is an EECS student with a background in algorithms, artificial intelligence and controls. He has taken CS170, CS188, EE120 and is taking EECS149 currently. His past research experience delves deeply into low-level optimization, parallelization and regression algorithms. He is currently also learning low-level control of Kobuki in EECS149 and state machine generation.
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
@@ -200,7 +197,7 @@
     <section id="additional">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-8 mx-auto">
                     <h2>Additional Materials</h2>
                     <p class="lead">Other stuff that might be cool.</p>
                 </div>
