@@ -117,7 +117,7 @@
                     </ul>
                     <p>
                         Already we have roughly discussed the overall design of our robot, but here we will clarify the large components of our design and how they fit together.
-                    </p> 
+                    </p>
                     <p class="lead">Infrastructure</p>
                     <p>
                         In order to complete the project we need to build a rig for our pendulum and an enhanced gripper. The rig for the pendulum need not be complex, for this we only need something that will allow a ball to swing back and forth reliably without losing too much energy. For the gripper, we decided that the margin of error with the standard gripper would be too high. In order to mitigate any issues with this we will create a mitt like attachment for the gripper which will dramatically improve our chances of being able to execute a successful catch.
@@ -128,11 +128,11 @@
                     </p>
                     <p class="lead">Modeling</p>
                     <p>
-                        Given the topic of the ball location which is being published, we can feed these datapoints into our model for the pendulum. This software will take in the data and from there extrapolate the parameters of the system. Once these parameters have been estimated, we will then have a rough prediction of the balls location as time progresses. This will be vital for later parts of the project. As mentioned above the robot is rather slow, so being able to predict where the robot will be in the future is needed in order to successfully catch the ball. 
+                        Given the topic of the ball location which is being published, we can feed these datapoints into our model for the pendulum. This software will take in the data and from there extrapolate the parameters of the system. Once these parameters have been estimated, we will then have a rough prediction of the balls location as time progresses. This will be vital for later parts of the project. As mentioned above the robot is rather slow, so being able to predict where the robot will be in the future is needed in order to successfully catch the ball.
                     </p>
                     <p class="lead">Planning and Execution</p>
                     <p>
-                        Once our model has accurately determined the trajectory of the ball, we can move onto the final stage of the process--the catch itself. Our software determines at which location along the ball's predicted trajectory will be the most optimal location for the ball to be caught. Once this has been determined, we will employ an inverse kinematics solver which will compute a path for the arm to move the end effecor into the desired position. For this we will have several obstacles/boundaries to ensure that the robot's movement does not interrupt the ball. Once the ball has moved into the desired location we will switch sensing back to using our active vision tracking, which will allow us to have feedback from the environment. If the ball comes within a certain distance from the end effector, we will begin to close the gripper. If all goes according to plan the timing is perfect and the gripper closes just as the ball comes between it. 
+                        Once our model has accurately determined the trajectory of the ball, we can move onto the final stage of the process--the catch itself. Our software determines at which location along the ball's predicted trajectory will be the most optimal location for the ball to be caught. Once this has been determined, we will employ an inverse kinematics solver which will compute a path for the arm to move the end effecor into the desired position. For this we will have several obstacles/boundaries to ensure that the robot's movement does not interrupt the ball. Once the ball has moved into the desired location we will switch sensing back to using our active vision tracking, which will allow us to have feedback from the environment. If the ball comes within a certain distance from the end effector, we will begin to close the gripper. If all goes according to plan the timing is perfect and the gripper closes just as the ball comes between it.
                     </p>
                     <p class="lead">Talk about the design of the robot here. What design criteria must your project meet? What is the desired
                         functionality? Describe the design you chose. What design choices did you make when you formulated your design? What
@@ -150,72 +150,75 @@
                 <div class="col-8 mx-auto">
                     <h2>Implementation</h2>
                     <p>
-                        The design has been described above. Now we will discuss how we actually went about implementing each of these sections. Additionally we include a description of how the software for this program was written and how each of the individual components/ROS nodes actually fit togehter. 
-                    </p> 
+                        The design has been described above. Now we will discuss how we actually went about implementing each of these sections. Additionally we include a description of how the software for this program was written and how each of the individual components/ROS nodes actually fit togehter.
+                    </p>
                     <pre>
                         while (true):
                             print("test")
                     </pre>
                     <p class="lead">Infrastructure</p>
                     <p>
-                    <p>
-                        For our pendulum, we considered several mor complicated designs for the creation of a pendulum. We ultimately found that using a mic stand worked well enough for what we needed for this project. If we were to extend this project a good next step would be to build a more precise rig that would allow for smoother more reliable motion. Our makeshift pendulum stand is pictured below. 
-                    </p>
-                    <img src="img/pendulum-rig.jpg" alt="flowchart" class="img-fluid auto-mx">
-                    <p>
-                        Our gripper is rather primitive, but is a proof of concept for what could be used in the future if we were to continue working on this project. For the intents and purposes of our project this was sufficient for us to use to help us achieve our other goals. In the future it would be nice to have a more acutated gripper which would allow for the gripper to be opened wider and closed tigher. The gripper attachement is needed as can be seen below. Without the attachment the ball can barely be grasped by the gripper and catching the ball would have been nearly impossible. Pictured below is the gripper before and after the addition of our attachment. The overall design just involves two larger plates which are attached directly to the original gripper attachments.
-                    </p>
-                    <p class="lead">Vision</p>
-                    <p>
-                        This is a description of our vision implementation. 
-                    </p>
-                    <p class="lead">Modeling</p>
-                    <p>
-                        This is a description of our model. 
-                    </p>
-                    <p class="lead">Planning and Execution</p>
-                    <p>
-                        This is a description of our planning and execution.
-                    </p>
-                    <p class="lead">Software Description</p>
-                    <p>
-                        The overall structure of the project can be described in the below flow chart. Below we describe in more detail the launch files we used, the topics we are publishing/subscribing to, and the ROS nodes which are present.
-                    </p>
-                    <img src="img/pendulum-bot-flow.svg" alt="flowchart" class="img-fluid auto-mx">
-                    <h5></h5>
-                    <h5>Topics</h5>
-                    <ul>
-                        <li><code>camera/rgb/image_raw</code> - This topic is created by the kinect and represents the RGB readouts from the kinect camera. This is the image that we will run computer vision on.</li>
-                        <li><code>camera/rgb/camera_info</code> - This topic is also created by the kinect and represents some camera metadata including the size of the image we are looking at.</li>
-                        <li><code>camera/depth/points</code> - This is the last topic created by the kinect that we are using. This represents the depth pointcloud created by the kinect which we ultimately use to calculate the third coordinate in the kinect frame.</li>
-                        <li><code>kinect/ball/location</code> - This is a topic created by our code which represents that current location of the ball in coordinates with respect to the kinect frame.</li>
-                        <li><code>base/ball/location</code> - This is a topic created by our code which represents that current location of the ball in coordinates with respect to the base frame of the robot.</li>
-                        <li><code>ball/goal</code> - This is a topic created by our code which represents the optimal location we have found at which the catch should be performed. Before the model finishes, this topic publishes no information.</li>
-                        <li><code>ball/ready</code> - This is a topic created by our code which publishes only a boolean value representing if the robot has moved to the pose specified in the <code>ball/goal</code> topic. If true that means the movement has finished and the gripper can close once the ball nears the end effector.</li>
-                        <li><code>robot/xdisplay</code> -  This is a topic that we publish to so that we can see the kinect camera image on the screen of the robot.</li>
-                    </ul>
-                    <h5>ROS Nodes</h5>
-                    <ul>
-                        <li><code>kinect_util</code> - This is our own program. The high level function of this node is to parse the information output by the kinect and turn this into the information published to the <code>kinect/ball/location</code> topic. The complete process for how this program works is described above in more detail in the section on vision.</li>
-                        <li><code>to_world_frame</code> - This is our own program which subscribes to <code>kinect/ball/location</code> and outputs the transformed coordinates in the base frame as the topic <code>base/ball/location</code>.</li>
-                        <li><code>model</code> - This too is a program written by us which handles the parameter estimation and modelling of the pendulum. The specific details of how this program works are described above in the model section. At a high level this node subscribes to <code>base/ball/location</code> and then published the optimal catch position to the topic <code>ball/goal</code></li>
-                        <li><code>move_to_goal</code> - This is our program which handles the path planning and execution of the path. This node subscribes to <code>ball/goal</code> in order to see where the end effector should move. It then publishes to <code>ball/ready</code> when the movement has been completed and the end effector is in the desired position.</li>
-                        <li><code>gripper</code> - This is the node that we wrote to control the gripper. In order to do this this node subscribes to <code>base/ball/location</code> and <code>ball/ready</code> to determine when the gripper is ready to be closed and when the ball is near enough to be closed such that the catch can be made. Once both of these are satisfied, the gripper will close with the ball in its grasp.</li>
-                        <li><code>robot_state_publisher</code> - This is a node which is used for the visualization fo the robot in RViz and is also used to determine the joint state of the robot. This relies on the URDF file of the robot (baxter_description /urdf/baxter.urdf).</li>
-                        <li><code>joint_state_publisher</code> - This is a node very similar to <code>robot_state_publisher</code> which is used for the visualization of the robot in RViz and is also used to determine the joint state of the robot. This relies on the URDF file of the robot (baxter_description /urdf/baxter.urdf).</li>
-                        <li><code>trajectory_server</code> - This is a part of the baxter interface which is used to actually perform the actuation of the robot.</li>
-                        <li><code>display_to_kinect_transformer</code> - This is a node which publishes the static transform form head_camera to camera_link (this is the frame of the kinect).</li>
-                    </ul>
-                    <h5>Launch Files</h5>
-                    <ul>
-                        <li><code>baxter_imaging pendulum.launch</code> - This is the primary launch file that we use to bring up all all of the nodes listed above. This additionally causes the other two below launch files to be run.</li>
-                        <li><code>freenect_launch freenect.launch</code> - This launch file will bring up the kinect and the topics related to the kinect () </li>
-                        <li><code>baxter_moveit_config demo_baxter.launch</code> - </li>
-                    </ul>
-                    <p class="lead">Talk about the implementation here. Describe any hardware you used or built. Illustrate with pictures and diagrams.
-                        What parts did you use to build your solution? describe any software you wrote in detail. Illustrate with diagrams, flow charts,
-                        and/or other appropriate visuals. This includes launch files, URDFs, etc. How does your omplete system work? Describe each step.
-                    </p>
+                        <p>
+                            For our pendulum, we considered several mor complicated designs for the creation of a pendulum. We ultimately found that using a mic stand worked well enough for what we needed for this project. If we were to extend this project a good next step would be to build a more precise rig that would allow for smoother more reliable motion. Our makeshift pendulum stand is pictured below.
+                        </p>
+                        <img src="img/pendulum-rig.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">
+                        <p>
+                            Our gripper is rather primitive, but is a proof of concept for what could be used in the future if we were to continue working on this project. For the intents and purposes of our project this was sufficient for us to use to help us achieve our other goals. In the future it would be nice to have a more acutated gripper which would allow for the gripper to be opened wider and closed tigher. The gripper attachement is needed as can be seen below. Without the attachment the ball can barely be grasped by the gripper and catching the ball would have been nearly impossible. Pictured below is the gripper before and after the addition of our attachment. The overall design just involves two larger plates which are attached directly to the original gripper attachments.
+                        </p>
+                        <img src="img/grip.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">    
+                        <img src="img/ball-grip.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">
+                        <img src="img/gripper.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">
+                        <p class="lead">Vision</p>
+                        <p>
+                            This is a description of our vision implementation.
+                        </p>
+                        <p class="lead">Modeling</p>
+                        <p>
+                            This is a description of our model.
+                        </p>
+                        <p class="lead">Planning and Execution</p>
+                        <p>
+                            This is a description of our planning and execution.
+                        </p>
+                        <p class="lead">Software Description</p>
+                        <p>
+                            The overall structure of the project can be described in the below flow chart. Below we describe in more detail the launch files we used, the topics we are publishing/subscribing to, and the ROS nodes which are present.
+                        </p>
+                        <img src="img/pendulum-bot-flow.svg" alt="flowchart" class="img-fluid auto-mx">
+                        <h5></h5>
+                        <h5>Topics</h5>
+                        <ul>
+                            <li><code>camera/rgb/image_raw</code> - This topic is created by the kinect and represents the RGB readouts from the kinect camera. This is the image that we will run computer vision on.</li>
+                            <li><code>camera/rgb/camera_info</code> - This topic is also created by the kinect and represents some camera metadata including the size of the image we are looking at.</li>
+                            <li><code>camera/depth/points</code> - This is the last topic created by the kinect that we are using. This represents the depth pointcloud created by the kinect which we ultimately use to calculate the third coordinate in the kinect frame.</li>
+                            <li><code>kinect/ball/location</code> - This is a topic created by our code which represents that current location of the ball in coordinates with respect to the kinect frame.</li>
+                            <li><code>base/ball/location</code> - This is a topic created by our code which represents that current location of the ball in coordinates with respect to the base frame of the robot.</li>
+                            <li><code>ball/goal</code> - This is a topic created by our code which represents the optimal location we have found at which the catch should be performed. Before the model finishes, this topic publishes no information.</li>
+                            <li><code>ball/ready</code> - This is a topic created by our code which publishes only a boolean value representing if the robot has moved to the pose specified in the <code>ball/goal</code> topic. If true that means the movement has finished and the gripper can close once the ball nears the end effector.</li>
+                            <li><code>robot/xdisplay</code> - This is a topic that we publish to so that we can see the kinect camera image on the screen of the robot.</li>
+                        </ul>
+                        <h5>ROS Nodes</h5>
+                        <ul>
+                            <li><code>kinect_util</code> - This is our own program. The high level function of this node is to parse the information output by the kinect and turn this into the information published to the <code>kinect/ball/location</code> topic. The complete process for how this program works is described above in more detail in the section on vision.</li>
+                            <li><code>to_world_frame</code> - This is our own program which subscribes to <code>kinect/ball/location</code> and outputs the transformed coordinates in the base frame as the topic <code>base/ball/location</code>.</li>
+                            <li><code>model</code> - This too is a program written by us which handles the parameter estimation and modelling of the pendulum. The specific details of how this program works are described above in the model section. At a high level this node subscribes to <code>base/ball/location</code> and then published the optimal catch position to the topic <code>ball/goal</code></li>
+                            <li><code>move_to_goal</code> - This is our program which handles the path planning and execution of the path. This node subscribes to <code>ball/goal</code> in order to see where the end effector should move. It then publishes to <code>ball/ready</code> when the movement has been completed and the end effector is in the desired position.</li>
+                            <li><code>gripper</code> - This is the node that we wrote to control the gripper. In order to do this this node subscribes to <code>base/ball/location</code> and <code>ball/ready</code> to determine when the gripper is ready to be closed and when the ball is near enough to be closed such that the catch can be made. Once both of these are satisfied, the gripper will close with the ball in its grasp.</li>
+                            <li><code>robot_state_publisher</code> - This is a node which is used for the visualization fo the robot in RViz and is also used to determine the joint state of the robot. This relies on the URDF file of the robot (baxter_description /urdf/baxter.urdf).</li>
+                            <li><code>joint_state_publisher</code> - This is a node very similar to <code>robot_state_publisher</code> which is used for the visualization of the robot in RViz and is also used to determine the joint state of the robot. This relies on the URDF file of the robot (baxter_description /urdf/baxter.urdf).</li>
+                            <li><code>trajectory_server</code> - This is a part of the baxter interface which is used to actually perform the actuation of the robot.</li>
+                            <li><code>display_to_kinect_transformer</code> - This is a node which publishes the static transform form head_camera to camera_link (this is the frame of the kinect).</li>
+                        </ul>
+                        <h5>Launch Files</h5>
+                        <ul>
+                            <li><code>baxter_imaging pendulum.launch</code> - This is the primary launch file that we use to bring up all all of the nodes listed above. This additionally causes the other two below launch files to be run.</li>
+                            <li><code>freenect_launch freenect.launch</code> - This launch file will bring up the kinect and the topics related to the kinect () </li>
+                            <li><code>baxter_moveit_config demo_baxter.launch</code> - </li>
+                        </ul>
+                        <p class="lead">Talk about the implementation here. Describe any hardware you used or built. Illustrate with pictures and diagrams.
+                            What parts did you use to build your solution? describe any software you wrote in detail. Illustrate with diagrams, flow charts,
+                            and/or other appropriate visuals. This includes launch files, URDFs, etc. How does your omplete system work? Describe each step.
+                        </p>
                 </div>
             </div>
         </div>
@@ -229,6 +232,9 @@
                     <p class="lead">Talk about the results here. How well did your project work? What tasks did it perform? Illustrate with pictures
                         and at least one video.
                     </p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9otSrr5odGk?rel=0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
             <div class="row">
