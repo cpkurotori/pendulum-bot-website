@@ -65,7 +65,7 @@
     <section id="intro">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Introduction</h2>
                     <p>
                         With robotics, the ability to understand and interact with the environment is of crucial importance. The general problem of studying trends in the environment and making predictions based on known information in order to act upon them is fascinating. This drove us to solve the problem of predicting a ball’s motion mid-air and catching it successfully. In our project, we train Baxter to reliably reach for and grab a ball while it is mid-air and in motion. This involves the use of computer vision and sensing to track the ball’s motion, contruction of a dynamics model of the system to predict where the ball is going, planning of the robot's motion to determine where the ball will be, and execution of the necessary movement to catch it. To complete this project we had to develop each of the individual components and also integrate them together in one cohesive system.
@@ -94,7 +94,7 @@
     <section id="design" class="bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Design</h2>
                     <p>
                         Given the goal of catching a ball mid-flight by the Baxter, a successful run will involve the Baxter being able to sense the trajectory of the ball, predict its future movement and grab the ball. Reliability is also a highly important metric of success.<br><br>
@@ -142,7 +142,7 @@
     <section id="implementation">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Implementation</h2>
                     <p>
                         The design has been described above. Now we will discuss how we actually went about implementing each of these sections. Additionally we include a description of how the software for this program was written and how each of the individual components/ROS nodes actually fit togehter.
@@ -200,6 +200,7 @@
                         <p>
                             With the aforementioned modelling in play, all that is needed left is executing the plan of motion. An important aspect of this planning is the orientation of the gripper, since we need to be able to catch the ball. To get the correct correct orientation of the gripper, we needed to get the frame of the right_hand with respect to the body frame. To do this, because we knew  we wanted the gripper to be facing down, we knew the z axis (with respect to the gripper) would be facing the floor, the x axis would be along the projection the pendulum follows along the base's xy's plane, and the y axis would be orthogonal to that projection. We calculated this rotation matrix and converted it to a quaternion which would give the orientation for the pose.
                         </p>
+                        <img src="img/rotation_calc.jpg" alt="rotation calculation" class="img-fluid auto-mx">
                         <p class="lead">Software Description</p>
                         <p>
                             The overall structure of the project can be described in the below flow chart. Below we describe in more detail the launch files we used, the topics we are publishing/subscribing to, and the ROS nodes which are present.
@@ -232,8 +233,8 @@
                         <h5>Launch Files</h5>
                         <ul>
                             <li><code>baxter_imaging pendulum.launch</code> - This is the primary launch file that we use to bring up all all of the nodes listed above. This additionally causes the other two below launch files to be run.</li>
-                            <li><code>freenect_launch freenect.launch</code> - This launch file will bring up the kinect and the topics related to the kinect () </li>
-                            <li><code>baxter_moveit_config demo_baxter.launch</code> - </li>
+                            <li><code>freenect_launch freenect.launch</code> - This launch file will bring up the kinect and the topics related to the kinect </li>
+                            <li><code>baxter_moveit_config demo_baxter.launch</code> - This launch file allows us to give MoveIt commands as well as see and control Baxter in RVIZ</li>
                         </ul>
                 </div>
             </div>
@@ -243,15 +244,45 @@
     <section id="results" class="bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Results</h2> 
+                    <p>
+                        The following 3 photso are the visualization of Baxter in it's current state with an overlay RGB-D image of what the connect sees. This shows that the static transform that connects the kinect to baxter is accurate as you can see the table, the pendulum and the ball. Additoinally, the pink sphere in the picture is the location of the PointStamped message that represents the ball's location in the real-world. This additionally shows that we were able to accurately calculate where the ball is hanging in free space.
+                    </p><img src="img/baxter_and_ball.png" alt="baxter and ball" class="img-fluid auto-mx">
+                    <img src="img/baxter_and_ball_2.png" alt="baxter and ball 2" class="img-fluid auto-mx">
+                    <img src="img/baxter_far_away.png" alt="baxter and surroundings" class="img-fluid auto-mx">
+                    <p>
+                        Although we were unhappy with the results from the demo, we are extremely please with the outcome of the total project.
+                        We were able to reach our goals despite many obstacles and are thoroughly proud of what we have accomplished. We were able to
+                        successfully track the ball in free space, put it in scope and perspective of baxter, calculate a model prediction of where
+                        the ball will end up, move Baxter to a position and orientation that would allow it to catch the ball, and finally catch the ball.
+                        Please enjoy this video of a full explanation and demo of the entire project:
+                    </p>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SnMkngNq84M?rel=0" allowfullscreen></iframe>
                     </div>
+                    <p>
+                    Here's a gif of it catching from a completely different setup (<a href="https://www.youtube.com/u0ePHx_Uj48">Click Here to watch video</a>):
+                    </p>
+                    <img src="img/catch.gif" class="img-fluid auto-mx">
+                    <p>
+                    And another: (<a href="https://www.youtube.com/bTfPsS0wAnY">Click Here to watch video</a>):
+                    </p>
+                    <img src="img/catch1.gif" class="img-fluid auto-mx">
+                    <p>
+                    And yet another, however, it didn't close the gripper in time (<a href="https://www.youtube.com/l7rDBGkgkKM">Click Here to watch video</a>):
+                    </p>
+                    <img src="img/catchfail.gif" class="img-fluid auto-mx">
+                    <p>
+                        We are very proud of the fact that we built a model good enough to catch a swinging ball. To highlight this fact, here is an image of the
+                        margin of error we were dealing with (i.e. the space that the ball could actually fit through so the gripper could actually hold onto the 
+                        ball):
+                    </p>
+                    <img src="img/margin_of_error.jpg" class="img-fluid auto-mx">
                 </div>
             </div>
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <p>
                         This is an additional video that demonstrates our capability to track the ball's motion.
                     </p>
@@ -266,10 +297,31 @@
     <section id="conclusion">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Conclusion</h2>
                     <p>
-                        Overall, through this project, we were able to accomplish the goal we strove to reach! Our arm was able to sufficiently model the pendulum motion, ready itself and catch the ball mid-flight. There is definitely further room for expansion and growth, in perhaps doing parameter estimation by letting the pendulum oscillate enough for the robot to infer. But overall, we are very satisfied with the progress that we have made and look forward to exploring the bounds of this project in the future!
+                        Overall, through this project, we were able to accomplish the goal we strove to reach! Our arm was able to sufficiently 
+                        model the pendulum motion, ready itself and catch the ball mid-flight. There is definitely room for expansion 
+                        and growth, in perhaps doing parameter estimation by letting the pendulum oscillate enough for the robot to infer.
+                        We encountered many difficulties along the way:
+                        <ul>
+                            <li>Poor quality cameras on Baxter</li>
+                            <li>Depth calculation using Kinect PointCloud from RGB (come from two sources resulting in a non-one-to-one pixel correlation)</li>
+                            <div class="row">
+                                <div class="col-4 mx-auto">
+                                    <img src="img/depth.jpg" alt="depth output" class="img-fluid auto-mx">
+                                </div>
+                                <div class="col-4 mx-auto">
+                                    <img src="img/rgb.jpg" alt="rgb output" class="img-fluid auto-mx">
+                                </div>
+                            </div>
+                            <i>If you look at the bottom left corner of where the table should be, you can clearly see that the rgb image is shifted to the right by some number of pixels</i>
+                            <li>Ball recognition and transformation to real world coordinates</li>
+                            <li>Time synchronization between ROS Master and reacting in real-time</li>
+                        </ul>
+                        We were able to successfully overcome the first three difficulties, but because of the last difficulty, we did have to do a manual
+                        gripper control because we just couldn't sync up the time well enough. Overall, we are very satisfied with the progress that we have
+                        made and look forward to exploring the bounds of this project in the future!
                     </p>
                 </div>
             </div>
@@ -279,13 +331,13 @@
     <section id="team" class="bg-light">
         <div class="container">
             <div class="row my-5">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Team</h2>
                     <div class="row">
                         <div class="col-4  mx-auto">
                             <img src="img/cam.jpg" alt="Cameron" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-8 mx-auto">
+                        <div class="col-12 mx-auto">
                             <p class="lead"> <b>Cameron Kurotori</b></p>
                             <p>
                                 Cameron is an EECS student with a background in algorithms, task automation, and software engineering. He has taken/is taking CS170, CS70, CS61 series as well as the EE16 series. This past summer he had the opportunity to be a software developer intern at IBM.
@@ -298,12 +350,12 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <div class="row">
                         <div class="col-4 mx-auto">
                             <img src="img/matt.png" alt="Matt" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-8 mx-auto">
+                        <div class="col-12 mx-auto">
                             <p class="lead"> <b>Matt Owen</b></p>
                             <p>
                                 Matt is an EECS student with a background in algorithms, robotics and aritifical intelligence. I have taken/am taking EE126, CS170, CS188, and DS100. In high school he was involved in robotics for four years primarily from the mechanical persepctive. Additionally he has taken classes in CAD and computer integrated manufacturing.
@@ -316,12 +368,12 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <div class="row">
                         <div class="col-4  mx-auto">
                             <img src="img/sean.jpg" alt="Sean" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-8 mx-auto">
+                        <div class="col-12 mx-auto">
                             <p class="lead"> <b>Sean Farhat</b></p>
                             <p>
                                 Sean is an EECS student with a background in algorithms, artificial intelligence, and low-level programming, having taken courses in both the EE, CS, Math, and Cognitive Science departments. He also does research in reinforcement learning and controls for microrobots. Additionally he has experience with computer vision and OpenCV.
@@ -334,12 +386,12 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <div class="row">
                         <div class="col-4  mx-auto">
                             <img src="img/swapnil.jpg" alt="Swapnil" class="img-fluid auto-mx">
                         </div>
-                        <div class="col-8 mx-auto">
+                        <div class="col-12 mx-auto">
                             <p class="lead"> <b>Swapnil Das</b></p>
                             <p>
                                 Swapnil is an EECS student with a background in algorithms, artificial intelligence and controls. He has taken CS170, CS188, EE120 and is taking EECS149 currently. His past research experience delves deeply into low-level optimization, parallelization and regression algorithms. He is currently also learning low-level control of Kobuki in EECS149 and state machine generation.
@@ -358,7 +410,7 @@
     <section id="additional">
         <div class="container">
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-12 mx-auto">
                     <h2>Additional Materials</h2>
                     <p class="lead">Our code</p>
                     <p>
