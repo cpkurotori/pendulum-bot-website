@@ -122,6 +122,10 @@
                     <p>
                         In order to complete the project we need to build a rig for our pendulum and an enhanced gripper. The rig for the pendulum need not be complex, for this we only need something that will allow a ball to swing back and forth reliably without losing too much energy. For the gripper, we decided that the margin of error with the standard gripper would be too high. In order to mitigate any issues with this we will create a mitt like attachment for the gripper which will dramatically improve our chances of being able to execute a successful catch.
                     </p>
+                    <p class="lead">Vision</p>
+                    <p>
+                        The first computational step of this process is the identification of where the ball will be with respect to the base frame of the robot. In order to determine this we will be using computer vision. Using computer vision libraries we will be able to determine where the ball is centered in the frame of the camera. From here we will be using a kinect sensor, which will allow us to additionally determine the distance away of the ball from the camera. From these measurements we will be able to publish the coordinates of the ball location with respect to the base frame. To correctly determine these coordinates we will also have to compute the transform from the coordinates in the kinect frame into the coordinates with respect to the base frame, which will be done using a static transform.
+                    </p>
                     <p class="lead">Modeling</p>
                     <p>
                         Given the topic of the ball location which is being published, we can feed these datapoints into our model for the pendulum. This software will take in the data and from there extrapolate the parameters of the system. Once these parameters have been estimated, we will then have a rough prediction of the balls location as time progresses. This will be vital for later parts of the project. As mentioned above the robot is rather slow, so being able to predict where the robot will be in the future is needed in order to successfully catch the ball. 
@@ -218,7 +222,7 @@
                                 Matt is an EECS student with a background in algorithms, robotics and aritifical intelligence. I have taken/am taking EE126, CS170, CS188, and DS100. In high school he was involved in robotics for four years primarily from the mechanical persepctive. Additionally he has taken classes in CAD and computer integrated manufacturing.
                             </p>
                             <p>
-                                The main contributions of Matt were towards the construction of the gripper attachment, the vision processing code, the code to compute the transformation from the camera frame of the kinect to the frame of the robot, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project.
+                                The main contributions of Matt were towards the construction of the gripper attachment, the vision processing code, the code to compute the transformation from the camera frame of the kinect to the frame of the robot, and the code to close the gripper. He also provided general assistance to the team for the other parts of the project and wrote the report/created the website along with the help of the others.
                             </p>
                         </div>
                     </div>
