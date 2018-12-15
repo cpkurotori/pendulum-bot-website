@@ -218,7 +218,15 @@
                                 the center point of the contour, which we will assume from this point on to be the current center of the ball.</li>
                             <li>The next step will be the calculation of the depth of the ball from the kinect. This is handled through the <code>getDepth</code> function whose behavior is described in the following steps.</li>
                             <li>Because of issues we encountered with calculating the location of the ball in the frame as well as the fact that there is not a one to one correspondence of the pixels of the RGB kinect camera and the kinect's depth sensor,
-                                we had to look for an approximate solution of the (x, y, z) location of the ball with respect to the kinect's frame.</li>
+                                we had to look for an approximate solution of the (x, y, z) location of the ball with respect to the kinect's frame. The images below show the non-one-to-one pixels between depth and rgb</li>
+                            <div class="row">
+                                <div class="col-4 mx-auto">
+                                    <img src="img/depth.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">
+                                </div>
+                                <div class="col-4 mx-auto">
+                                    <img src="img/rgb.jpg" alt="Pendulum Rig" class="img-fluid auto-mx">
+                                </div>
+                            </div>
                             <li>We iterate over 500 samples of a normal distribution of points around the calculated ball's 2D position. We then find the minumum distance away from the kinect frame using the point cloud. We assume that the minimum distance
                                 is the true distance, as there will be nothing obstructing the ball. Before doing this the algorithm would often mis-identify the depth as something much larger, using the depth values from behind the ball. </li>
                             <li>From here we have calculated the (x, y, d) position of the ball with respect to the kinect frame which will then be returned.</li>
@@ -344,17 +352,21 @@
                         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SnMkngNq84M?rel=0" allowfullscreen></iframe>
                     </div>
                     <p>
-                        Here's a gif of it catching from a completely different setup (<a href="https://www.youtube.com/u0ePHx_Uj48">Click Here to watch video</a>):
+                        Below are three gifs of different set-ups. The one to the right, althought doesn't catch it, lands in the perfect spot for the gripper to grab, however, the gripper didn't close fast enough so it didn't catch it. Click on the gif to open the youtube videos
+                        to watch the full video.
                     </p>
-                    <img src="img/catch.gif" class="img-fluid auto-mx">
-                    <p>
-                        And another: (<a href="https://www.youtube.com/bTfPsS0wAnY">Click Here to watch video</a>):
-                    </p>
-                    <img src="img/catch1.gif" class="img-fluid auto-mx">
-                    <p>
-                        And yet another, however, it didn't close the gripper in time (<a href="https://www.youtube.com/l7rDBGkgkKM">Click Here to watch video</a>):
-                    </p>
-                    <img src="img/catchfail.gif" class="img-fluid auto-mx">
+                    <div class="row">
+                        <div class="col-4 mx-auto">
+                            <a href="https://www.youtube.com/watch?v=u0ePHx_Uj48"><img src="img/catch.gif" class="img-fluid auto-mx"></a>
+                        </div>
+                        <div class="col-4 mx-auto">
+                            <a href="https://www.youtube.com/watch?v=bTfPsS0wAnY"><img src="img/catch1.gif" class="img-fluid auto-mx"></a>
+                        </div>
+                        <div class="col-4 mx-auto">
+                            <a href="https://www.youtube.com/watch?v=l7rDBGkgkKM"><img src="img/catchfail.gif" class="img-fluid auto-mx"></a>
+                        </div>
+                    </div>
+
                     <p>
                         We are very proud of the fact that we built a model good enough to catch a swinging ball. To highlight this fact, here is an image of the margin of error we were dealing with (i.e. the space that the ball could actually fit through so the gripper could
                         actually hold onto the ball):
@@ -381,25 +393,17 @@
                 <div class="col-12 mx-auto">
                     <h2>Conclusion</h2>
                     <p>
-                        Overall, through this project, we were able to accomplish the goal we strove to reach! Our arm was able to sufficiently model the pendulum motion, ready itself and catch the ball mid-flight. There is definitely room for expansion and growth, in perhaps
-                        doing parameter estimation by letting the pendulum oscillate enough for the robot to infer. We encountered many difficulties along the way:
-                        <ul>
-                            <li>Poor quality cameras on Baxter</li>
-                            <li>Depth calculation using Kinect PointCloud from RGB (come from two sources resulting in a non-one-to-one pixel correlation)</li>
-                            <div class="row">
-                                <div class="col-6 mx-auto">
-                                    <img src="img/depth.jpg" alt="depth output" class="img-fluid auto-mx">
-                                </div>
-                                <div class="col-6 mx-auto">
-                                    <img src="img/rgb.jpg" alt="rgb output" class="img-fluid auto-mx">
-                                </div>
-                            </div>
-                            <i>If you look at the bottom left corner of where the table should be, you can clearly see that the rgb image is shifted to the right by some number of pixels</i>
-                            <li>Ball recognition and transformation to real world coordinates</li>
-                            <li>Time synchronization between ROS Master and reacting in real-time</li>
-                        </ul>
-                        We were able to successfully overcome the first three difficulties, but because of the last difficulty, we did have to do a manual gripper control because we just couldn't sync up the time well enough. Overall, we are very satisfied with the progress
-                        that we have made and look forward to exploring the bounds of this project in the future!
+                        Overall, we are satsified with what our project can do. It is totally generalizable in that we can place the ball anywhere within the right arm’s range and it will be able to catch it. This took a combination of sensing (tracking the ball location and
+                        transforming that into the correct frame), planning (modeling the pendulum in 3D space to predict the ball’s trajectory), and actuation (moving the robot to actually catch the ball). Not only did we learn a lot about ROS and good
+                        design choices for a complex system such as this, we were also able to apply the mathematics we learned in class and watch our model behave as we had hoped. It was truly a remarkable moment when our robot computed a perfect catching
+                        position. At each step in the process, we faced many setbacks in how to implement what we wanted, but by chipping away at the problems little by little and trying various approaches, we were able to find a solution to almost every
+                        single problem we had until the entire system was working.
+                    </p>
+                    <p>
+                        However, there is plenty of room for growth. We were unable to get the entirety of the gripping functionality working. Our approach was to constantly keep track of the squared Euclidian distance between the gripper and the ball, and once it passed a certain
+                        threshold, close the gripper. Unfortunately, ROS was unable to react fast enough relative to the speed of the ball traveling, so we could never get the gripper to close in time. In addition, the quality of the Kinect 1.0 camera
+                        was not the best, so noise was a huge issue as well. We decided to just manually close the gripper ourselves to solve this problem. In addition, if we had one more gripper, we would have been interested in implementing a 2 hand
+                        catcher. This would be a simple extension: if the proposed catching position was on one side or the other, choose the closest arm to catch it. This would allow for a much large range of places we could release the ball from.
                     </p>
                 </div>
             </div>
