@@ -185,11 +185,20 @@
                         </ul>
                         <p class="lead">Modeling</p>
                         <p>
-                            This is a description of our model.
+                            Now that vision lets us find the position of the ball at any moment, we can model the trajectory of the pendulum. What we did in order to achieve this was as follows. 
                         </p>
+                        <p>
+                            We use the three-dimensional equations to model our pendulum oscillatory motion below. (For further details on the derivation, refer to the additional information). Below is an example modelled trajectory of a path given parameters. The blue dot is the pivot, and the grey line the possible trajectory it could take given a starting position marked by the translucent dot.
+                        </p>
+                        <img src="img/trajectory.jpg" alt="trajectory" class="img-fluid auto-mx">
+                        <p>
+                            It is important to note that our equation makes some simplifying assumptions. As we observe the dynamics of phi and theta (where phi and theta are in the diagram marked below), we notice how theta is the only changing angle. Because of our model, we only assume that theta is the changing parameter. phi remains constant. We do not account for damping in the value of theta because our robot aims to catch the pendulum before a full oscillation, making the effect of air resistance negligible, especially given our closeness threshold feedback system that helps minimize errors caused in the planning.
+                        </p>
+                        <img src="img/p_angles.jpg" alt="theta and phi" class="img-fluid auto-mx">
+                        <img src="img/thetavphi.jpg" alt="graph of theta v phi" class="img-fluid auto-mx">
                         <p class="lead">Planning and Execution</p>
                         <p>
-                            This is a description of our planning and execution.
+                            With the aforementioned modelling in play, all that is needed left is executing the plan of motion. An important aspect of this planning is the orientation of the gripper, since we need to be able to catch the ball. To get the correct correct orientation of the gripper, we needed to get the frame of the right_hand with respect to the body frame. To do this, because we knew  we wanted the gripper to be facing down, we knew the z axis (with respect to the gripper) would be facing the floor, the x axis would be along the projection the pendulum follows along the base's xy's plane, and the y axis would be orthogonal to that projection. We calculated this rotation matrix and converted it to a quaternion which would give the orientation for the pose.
                         </p>
                         <p class="lead">Software Description</p>
                         <p>
@@ -235,12 +244,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-8 mx-auto">
-                    <h2>Results</h2>
+                    <h2>Results</h2> 
                     <p class="lead">Talk about the results here. How well did your project work? What tasks did it perform? Illustrate with pictures
                         and at least one video.
                     </p>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9otSrr5odGk?rel=0" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SnMkngNq84M?rel=0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -359,6 +368,10 @@
                             The computer vision code we used was a modification of the code by Adrian Rosebrock from pyimagesearch. The tutorial we followed is <a href="https://www.pyimagesearch.com/2015/09/14/ball-tracking-with-opencv/">here</a>.
                         </li>
                     </ul>
+                    <p>
+                        Below are the derivations made to prove the 3-dimensional model.
+                    </p>
+                    <img src="img/derivations.jpg" alt="derivations" class="img-fluid auto-mx">
                 </div>
             </div>
         </div>
